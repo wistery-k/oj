@@ -1,0 +1,28 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Author:</b>
+  <%= @submission.author %>
+</p>
+
+<p>
+  <b>Problem:</b>
+  <%= @submission.problem %>
+</p>
+
+<p>
+  <b>Lang:</b>
+  <%= @submission.lang %>
+</p>
+
+<p>
+  <b>Verdict:</b>
+  <%= @submission.verdict %>
+</p>
+
+<p>
+  <b>Code:</b><br />
+  <pre><%= @submission.code %></pre>
+</p>
+
+<%= link_to 'Back', submissions_path %>

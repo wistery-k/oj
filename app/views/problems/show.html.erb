@@ -1,0 +1,56 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Title:</b>
+  <%= @problem.title %>
+</p>
+
+<p>
+  <b>Time limit:</b>
+  <%= @problem.time_limit %>
+</p>
+
+<p>
+  <b>Memory limit:</b>
+  <%= @problem.memory_limit %>
+</p>
+
+<p>
+  <b>Statement:</b>
+</p>
+<p>
+  <%=raw hbr @problem.statement %>
+</p>
+
+<h2>Testcases</h2>
+<% @problem.testcases[0..2].each do |testcase| %>
+  <p>
+    <b>Input:</b><br />
+    <pre><%= testcase.input %></pre>
+  </p>
+ 
+  <p>
+    <b>Output:</b><br />
+    <pre><%= testcase.output %></pre>
+  </p>
+<% end %>
+
+<p>
+  <h2>Add testcase:</h2>
+  <%= form_for([@problem, @problem.testcases.build]) do |f| %>
+  <div class="field">
+    <%= f.label :input %><br />
+    <%= f.text_area :input %>
+  </div>
+  <div class="field">
+    <%= f.label :output %><br />
+    <%= f.text_area :output %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+</p>
+
+<%= link_to 'Edit', edit_problem_path(@problem) %> |
+<%= link_to 'Back', problems_path %>

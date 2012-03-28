@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  title: MyString
+  statement: MyString
+  time_limit: 1.5
+  memory_limit: 1.5
+
+two:
+  title: MyString
+  statement: MyString
+  time_limit: 1.5
+  memory_limit: 1.5
