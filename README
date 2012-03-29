@@ -6,5 +6,37 @@
 Ruby 1.9.3
 RoR 3.2
 
-起動方法
-$ rails s
+== 準備(rubyのインストール) ==
+
+#rvm(http://beginrescueend.com/)を使うのがいいらしい。？
+$ bash -s stable < <(curl -s https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvm-installer)
+# .bashrcに
+# [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
+# を追記する。
+$ source .bashrc
+$ rvm requirements
+# 表示された指示に従ってaptで色々入れる。
+$ rvm install 1.9.3
+$ rvm use 1.9.3
+$ rvm gemset create rails32
+$ rvm use 1.9.3@rails32 --default
+
+== 起動方法 ==
+$ git clone ほげ
+$ cd oj
+$ bundle install #依存ライブラリのインストール
+$ rails s --port 3000
+# (ブラウザでlocalhost:3000を開く)
+
+== guard-livereloadの使い方 ==
+
+変更したらブラウザをリロードという事が出来る。
+参考URL: http://blog.digital-squad.net/article/208744178.html
+guardが、ファイルの変更を検知してなにかするプログラム、livereloadがwebsocketで待ち受けて、ping受け取ったらリロードする各ブラウザの拡張機能（たぶん）。
+
+chromeの場合
+拡張機能をインストール。
+https://chrome.google.com/webstore/detail/jnihajbhpnppcggbcgedagnkighmdlei
+ojディレクトリで、
+$ bundle exec guard
+立ち上がったら、chromeでリロードしたいタブに切り替えて、右上のにあるLRボタンを押す。
