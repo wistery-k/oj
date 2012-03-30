@@ -2,6 +2,7 @@
 
 <table>
   <tr>
+    <th>#</th>
     <th>Author</th>
     <th>Problem</th>
     <th>Lang</th>
@@ -12,15 +13,40 @@
 
 <% @submissions.each do |submission| %>
   <tr>
+    <td><%= submission.id %></td>
     <td><%= submission.author %></td>
     <td><%= submission.problem %></td>
     <td><%= submission.lang %></td>
-    <td><%= submission.verdict %></td>
+    <td>
+      <%= submission.verdict %>
+      <% if submission.id == @watch %>
+        <img src="/images/loading.gif" width="30px"/>
+      <% end %>
+    </td>
     <td><%= link_to 'Show', submission %></td>
     <td><%= link_to 'Destroy', submission, confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 <% end %>
 </table>
+
+<script>
+
+  function check(watch){
+    callback = function(json){
+      if(json["verdict"] != "pending"){
+        window.location.reload();
+      }
+    };
+    x = $.getJSON("/submissions/"+watch+".json", {}, callback);
+  }
+
+  <% if @watch %>
+  (function(){
+    watch = <%= "#{@watch}" %>;
+    setInterval("check(watch)", 1000);
+  })();
+  <% end %>
+</script>
 
 <br />
 

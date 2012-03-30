@@ -1,8 +1,16 @@
 class SubmissionsController < ApplicationController
+
+  require 'net/http'
+
   # GET /submissions
   # GET /submissions.json
   def index
     @submissions = Submission.all.reverse
+    @watch = params[:watch].to_i
+    if @watch then
+      my_submission = (@submissions.select do |x| x.id == @watch end)[0]
+      @watch = nil if my_submission && not self.class.helpers.now_judging?(my_submission)
+    end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -35,20 +43,16 @@ class SubmissionsController < ApplicationController
   # POST /submissions
   # POST /submissions.json
   def create
-    s = params[:submission]
-    s[:verdict] = self.class.helpers.judge(s[:lang], s[:code], Problem.find(s[:problem]).testcases)
+    params[:submission][:verdict] = 'pending'
 
     @submission = Submission.new(params[:submission])
+    flg = @submission.save
 
-    respond_to do |format|
-      if @submission.save
-        format.html { redirect_to @submission, notice: 'Submission was successfully created.' }
-        format.json { render json: @submission, status: :created, location: @submission }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @submission.errors, status: :unprocessable_entity }
-      end
-    end
+    Thread.new do 
+      Net::HTTP.get("localhost", "/submissions/judge/#{@submission.id}", port = 3000 )
+    end       
+
+    redirect_to :action => 'index', :watch => @submission.id
   end
 
   # DELETE /submissions/1

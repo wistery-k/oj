@@ -1,5 +1,9 @@
 module SubmissionsHelper
 
+  def now_judging? submission 
+    /^pending|testing #\d$/ =~ submission.verdict
+  end
+
   def normalize_whitespaces str
     str.strip.gsub(/[\r\n\t ]+/, ' ')
   end
