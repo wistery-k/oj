@@ -1,56 +1,61 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <b>Title:</b>
-  <%= @problem.title %>
-</p>
-
-<p>
-  <b>Time limit:</b>
-  <%= @problem.time_limit %>
-</p>
-
-<p>
-  <b>Memory limit:</b>
-  <%= @problem.memory_limit %>
-</p>
-
-<p>
-  <b>Statement:</b>
-</p>
-<p>
-  <%=raw hbr @problem.statement %>
-</p>
-
-<h2>Testcases</h2>
-<% @problem.testcases[0..2].each do |testcase| %>
-  <p>
-    <b>Input:</b><br />
-    <pre><%= testcase.input %></pre>
-  </p>
- 
-  <p>
-    <b>Output:</b><br />
-    <pre><%= testcase.output %></pre>
-  </p>
-<% end %>
-
-<p>
-  <h2>Add testcase:</h2>
-  <%= form_for([@problem, @problem.testcases.build]) do |f| %>
-  <div class="field">
-    <%= f.label :input %><br />
-    <%= f.text_area :input %>
+<div class="container">
+  <div class="content">
+    <div class="row">
+      <div class="span7">
+        <center>
+          <p>
+            <h1><%= @problem.title %></h2>
+          </p>
+          
+          <p>
+            <b>Time limit:</b>
+            <%= @problem.time_limit %> s
+          </p>
+          
+          <p>
+            <b>Memory limit:</b>
+            <%= @problem.memory_limit %> MiB
+          </p>
+          </center>
+        <p>
+          <%=raw hbr @problem.statement %>
+        </p>
+        
+        <h3>Sample</h3>
+        <% @problem.testcases[0..2].each_with_index do |testcase,index| %>
+        <p>
+          <b>Input<%= index %>:</b><br />
+          <pre><%= testcase.input %></pre>
+        </p>
+        
+        <p>
+          <b>Output<%= index %>:</b><br />
+          <pre><%= testcase.output %></pre>
+        </p>
+        <% end %>
+      </div>
+        
+      <div class="span3">
+        <div class="col">
+          <div class="well sidebar-nav">
+            <h3>submit</h3>
+            <%= link_to "click here to submit", :controller => 'submissions', :action => 'new', :problem => @problem.id %>
+          </div>
+          <div class="well sidebar-nav">
+            <h3>choices</h3>
+            <ul class="nav nav-list">
+              <li class="nav-header">anyone</li>
+              <li><%= link_to "see testcases", "/problems/#{@problem.id}/testcases" %></li>
+              <li class="nav-header">writer</li>
+              <li><%= link_to "add testcase", "/problems/#{@problem.id}/testcases/new"  %></li>
+              <li><%= link_to "view stats", "#"  %></li>
+              <li><%= link_to "edit problem", edit_problem_path(@problem)  %></li>
+              <li><%= link_to 'delete problem', @problem, confirm: 'Are you sure?', method: :delete %></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :output %><br />
-    <%= f.text_area :output %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
-</p>
+</div>
 
-<%= link_to 'Edit', edit_problem_path(@problem) %> |
-<%= link_to 'Back', problems_path %>

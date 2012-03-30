@@ -1,6 +1,6 @@
-<h1>Listing submissions</h1>
+<h1 style="margin-bottom:10px;">submissions</h1>
 
-<table>
+<table class="table table-striped">
   <tr>
     <th>#</th>
     <th>Author</th>
@@ -15,16 +15,16 @@
   <tr>
     <td><%= submission.id %></td>
     <td><%= submission.author %></td>
-    <td><%= submission.problem %></td>
+    <td><%= problem_link submission.problem %></div></td>
     <td><%= submission.lang %></td>
     <td>
-      <%= submission.verdict %>
+      <%=raw colorize_verdict submission.verdict %>
       <% if submission.id == @watch %>
         <img src="/images/loading.gif" width="30px"/>
       <% end %>
     </td>
-    <td><%= link_to 'Show', submission %></td>
-    <td><%= link_to 'Destroy', submission, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= link_to 'Detail', submission, :class => 'btn' %></td>
+    <td><%= link_to image_tag('/images/delete_red.png', :border => '0', :width => '20px'), submission, confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 <% end %>
 </table>
@@ -48,7 +48,3 @@
   <% end %>
 </script>
 
-<br />
-
-<%= link_to 'New Submission', new_submission_path %> | 
-<%= link_to 'Back', :root %>

@@ -1,0 +1,32 @@
+<h1 style="margin-bottom:10px;">Problem #<%= @problem_id %> All Testcases</h1>
+<% @testcases.each_with_index do |testcase,index| %>
+<h3>testcase #<%= index %> <%= link_to image_tag('/images/delete_red.png', :border => '0', :width => '20px'), "/problems/#{@problem_id}/testcases/#{testcase.id}", confirm: 'Are you sure?', method: :delete %></h3>
+<p>
+  <b>Input:</b><br />
+  <pre><%= testcase.input %></pre>
+</p>
+
+<p>
+  <b>Output:</b><br />
+  <pre><%= testcase.output %></pre>
+</p>
+<% end %>
+
+<% if false %>
+<p>
+  <h2>Add testcase:</h2>
+  <%= form_for([@problem, @problem.testcases.build]) do |f| %>
+  <div class="field">
+    <%= f.label :input %><br />
+    <%= f.text_area :input %>
+  </div>
+  <div class="field">
+    <%= f.label :output %><br />
+    <%= f.text_area :output %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+</p>
+<% end %>

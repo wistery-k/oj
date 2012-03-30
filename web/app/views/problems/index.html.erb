@@ -1,31 +1,23 @@
-<h1>Listing problems</h1>
+<h1 style="margin-bottom:10px;">problems</h1>
 
-<table>
+<table class="table table-striped">
   <tr>
+    <th>#</th>
     <th>Title</th>
     <th>Statement</th>
     <th>Time limit</th>
     <th>Memory limit</th>
-    <th></th>
-    <th></th>
-    <th></th>
   </tr>
 
 <% @problems.each do |problem| %>
   <tr>
-    <td><%= problem.title %></td>
+    <td><%= problem.id %></td>
+    <td><%= link_to problem.title, problem %></td>
     <td><%= problem.statement[0..20] %>...</td>
     <td><%= problem.time_limit %></td>
     <td><%= problem.memory_limit %></td>
-    <td><%= link_to 'Show', problem %></td>
-    <td><%= link_to 'Edit', edit_problem_path(problem) %></td>
-    <td><%= link_to 'Destroy', problem, confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 <% end %>
 </table>
 
-<br />
-
-<%= link_to 'New Problem', new_problem_path %> | 
-<%= link_to 'Back', :root %>
 

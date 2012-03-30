@@ -2,7 +2,7 @@ class ProblemsController < ApplicationController
   # GET /problems
   # GET /problems.json
   def index
-    @problems = Problem.all
+    @problems = Problem.all.reverse
 
     respond_to do |format|
       format.html # index.html.erb

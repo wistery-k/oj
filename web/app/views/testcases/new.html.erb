@@ -1,0 +1,17 @@
+<p>
+  <h2>New testcase:</h2>
+  <%= form_for([@problem, @problem.testcases.build]) do |f| %>
+  <div class="field">
+    <%= f.label :input %><br />
+    <%= f.text_area :input %>
+  </div>
+  <div class="field">
+    <%= f.label :output %><br />
+    <%= f.text_area :output %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+</p>
+

@@ -1,5 +1,19 @@
 module SubmissionsHelper
 
+  def colorize_verdict str 
+    def make (color, str)
+      "<div style=\"color:#{color}; font-weight:bold\">#{str}</div>"
+    end
+    case str
+    when 'AC'
+      make("#59ea3a", str)
+    when 'WA'
+      make("#a600a6", str)
+    else 
+      str
+    end
+  end
+
   def now_judging? submission 
     /^pending|testing #\d$/ =~ submission.verdict
   end

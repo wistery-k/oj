@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <p>
   <b>Author:</b>
   <%= @submission.author %>
@@ -17,7 +15,7 @@
 
 <p>
   <b>Verdict:</b>
-  <%= @submission.verdict %>
+  <%=raw colorize_verdict @submission.verdict %>
 </p>
 
 <p>
@@ -25,4 +23,3 @@
   <pre><%= @submission.code %></pre>
 </p>
 
-<%= link_to 'Back', submissions_path %>
