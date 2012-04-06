@@ -23,3 +23,20 @@
   <pre><%= @submission.code %></pre>
 </p>
 
+<hr/>
+
+<p>
+  <b>Tests:</b><br />
+  <% testcases = Problem.find(@submission.problem).testcases %>
+  <% @submission.testresults.each_with_index do |testresult, i| %>
+  <p><b>test #<%= i %></b></p>
+  <p>verdict: <%=raw colorize_verdict testresult.verdict %></p>
+  <p>output</p>
+  <pre><%= testresult.output %></pre>
+  <p>answer</p>
+  <pre><%= testcases[i].output %></pre>
+  <% end %>
+</p>
+
+
+
