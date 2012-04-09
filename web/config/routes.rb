@@ -1,4 +1,4 @@
-Oj::Application.routes.draw do
+Web::Application.routes.draw do
   resources :submissions
 
   resources :problems do
