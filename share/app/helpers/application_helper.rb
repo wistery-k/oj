@@ -12,4 +12,9 @@ module ApplicationHelper
       "problem has been deleted"
     end
   end
+
+  def twitter_icon name
+    "http://api.twitter.com/1/users/profile_image/#{name}.json"
+  end
+
 end

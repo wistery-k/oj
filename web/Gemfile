@@ -24,8 +24,10 @@ group :assets do
 
   gem 'twitter-bootstrap-rails'
 
-  # gem 'omniauth'
-  # gem 'omniauth-twitter'
+  gem 'omniauth'
+  gem 'omniauth-twitter'
+
+  gem 'twitter_bootstrap_form_for'
 end
 
 gem 'jquery-rails'

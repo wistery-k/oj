@@ -26,10 +26,27 @@
       <div class="navbar-inner">
         <div class="container">
           <a class="brand" href="/">no title</a>
-          <ul class="nav">
+          <ul class="nav pull-left">
             <li><%= link_to 'Home', :root %></a></li>
             <li><%= link_to 'Problems', problems_path %></a></li>
             <li><%= link_to 'Submissions', submissions_path %></a></li>
+          </ul>
+          <ul class="nav pull-right">
+            <% if current_user %>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <%= image_tag(twitter_icon(current_user.name), :border => '0', :width => '20px') %>
+                <%= current_user.name %>
+                
+                <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+                <li><%= link_to 'LOGOUT', logout_path %></li>
+              </ul>
+            </li>
+            <% else %>
+            <li><%= link_to image_tag('/images/signin.png'), '/auth/twitter' %></li>
+            <% end %>
           </ul>
         </div>
       </div>

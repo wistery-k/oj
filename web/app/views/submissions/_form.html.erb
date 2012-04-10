@@ -1,3 +1,4 @@
+<% if current_user then @submission.author = current_user.name end %>
 <%= form_for(@submission) do |f| %>
   <% if @submission.errors.any? %>
     <div id="error_explanation">
@@ -12,19 +13,15 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :author %><br />
     <%= f.text_field :author %>
   </div>
   <div class="field">
-    <%= f.label :problem %><br />
     <%= f.number_field :problem %>
   </div>
   <div class="field">
-    <%= f.label :lang %><br />
-    <%= f.text_field :lang %>
+    <%= f.select :lang, %w(c++ java ruby python ocaml) %>
   </div>
   <div class="field">
-    <%= f.label :code %><br />
     <%= f.text_area :code %>
   </div>
   <div class="actions">

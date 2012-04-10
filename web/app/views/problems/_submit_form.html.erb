@@ -1,0 +1,24 @@
+<%= form_tag "/submissions/with_file", :multipart=>true do %>
+  <% if not current_user then %>
+  <div class="field">
+    <%= label_tag :author %><br />
+    <%= text_field_tag :author %>
+  </div>
+  <% else %>
+    <div class="field">
+    <%= hidden_field_tag 'author', current_user.name %>
+  </div>
+  <% end %>
+  <div class="field">
+    <%= hidden_field_tag 'problem', @problem.id %>
+  </div>
+  <div class="field">
+    <%= select_tag :lang, options_for_select(%w(c++ java ruby python ocaml)) %>
+  </div>
+  <div class="field">
+    <%= file_field :file, :htmldata %>
+  </div>
+  <div class="actions">
+    <%= submit_tag "submit" %>
+  </div>
+<% end %>

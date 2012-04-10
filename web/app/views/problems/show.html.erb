@@ -39,7 +39,11 @@
         <div class="col">
           <div class="well sidebar-nav">
             <h3>submit</h3>
-            <%= link_to "click here to submit", :controller => 'submissions', :action => 'new', :problem => @problem.id %>
+            <%= link_to "submit form", :controller => 'submissions', :action => 'new', :problem => @problem.id %>
+          </div>
+          <div class="well sidebar-nav">
+            <h3>quick submit</h3>
+            <%= render 'submit_form' %>
           </div>
           <div class="well sidebar-nav">
             <h3>choices</h3>

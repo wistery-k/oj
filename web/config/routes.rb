@@ -1,12 +1,17 @@
 Web::Application.routes.draw do
   resources :submissions
 
+  match '/submissions/with_file', :to => 'submissions#create_with_file'
+
   resources :problems do
     resources :testcases
     resources :submissions
   end
 
   get "home/index"
+
+  match '/auth/:provider/callback', :to => 'sessions#callback'
+  match '/logout' => 'sessions#destroy', :as => :logout
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

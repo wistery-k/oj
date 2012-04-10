@@ -45,12 +45,8 @@ class SubmissionsController < ApplicationController
     end
   end
 
-  # POST /submissions
-  # POST /submissions.json
-  def create
-    params[:submission][:verdict] = 'pending'
-
-    @submission = Submission.new(params[:submission])
+  def create_base params
+    @submission = Submission.new(params)
     flg = @submission.save
 
     Thread.new do # TODO こんなんでいいのだろうか？ non-blocking
@@ -58,6 +54,23 @@ class SubmissionsController < ApplicationController
     end       
 
     redirect_to :action => 'index', :watch => @submission.id
+  end
+
+  # POST /submissions
+  # POST /submissions.json
+  def create
+    params[:submission][:verdict] = 'pending'
+    create_base(params[:submission])    
+  end
+
+  def create_with_file
+    tmp = {}
+    tmp[:author] = params[:author]
+    tmp[:problem] = params[:problem]
+    tmp[:lang] = params[:lang]
+    tmp[:code] = params[:file]['htmldata'].read
+    tmp[:verdict] = 'pending'
+    create_base(tmp)
   end
 
   # DELETE /submissions/1
